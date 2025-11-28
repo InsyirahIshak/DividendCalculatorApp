@@ -1,9 +1,13 @@
 package com.insyirah.individualassignment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class AboutActivity extends AppCompatActivity {
@@ -13,20 +17,38 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Setup toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar_about);
+        setSupportActionBar(toolbar);
 
-        TextView github = findViewById(R.id.txtGithub);
-        github.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW,
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
+        // GitHub link click
+        TextView txtGitHub = findViewById(R.id.txtGitHub);
+        txtGitHub.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://github.com/InsyirahIshak/DividendCalculatorApp"));
-            startActivity(intent);
+            startActivity(browserIntent);
         });
-
     }
+
     @Override
-    public boolean onSupportNavigateUp() {
-        finish();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_about) {
+            return true; // Already here
+        }
+        if (item.getItemId() == R.id.menu_home) {
+            startActivity(new Intent(this, HomeActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

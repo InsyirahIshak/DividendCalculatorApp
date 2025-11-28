@@ -2,15 +2,16 @@ package com.insyirah.individualassignment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
+import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     EditText edtInvested, edtRate, edtMonths;
     Button btnCalculate;
@@ -19,7 +20,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         edtInvested = findViewById(R.id.edtInvested);
         edtRate = findViewById(R.id.edtRate);
@@ -28,30 +36,10 @@ public class MainActivity extends AppCompatActivity {
         txtResult = findViewById(R.id.txtResult);
 
         btnCalculate.setOnClickListener(v -> calculateDividend());
+
+
     }
 
-    // 📌 THIS MUST BE OUTSIDE onCreate() — Correct location
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    // 📌 ALSO OUTSIDE onCreate()
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_about) {
-            startActivity(new Intent(this, AboutActivity.class));
-            return true;
-        }
-        if (item.getItemId() == R.id.menu_home) {
-            startActivity(new Intent(this, MainActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    // 📌 Your calculation function stays here
     private void calculateDividend() {
         String investedStr = edtInvested.getText().toString();
         String rateStr = edtRate.getText().toString();
@@ -78,5 +66,23 @@ public class MainActivity extends AppCompatActivity {
                 "Monthly Dividend: RM " + String.format("%.2f", monthlyDividend) +
                         "\nTotal Dividend: RM " + String.format("%.2f", totalDividend)
         );
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_about) {
+            startActivity(new Intent(this, AboutActivity.class));
+            return true;
+        }
+        if (item.getItemId() == R.id.menu_home) {
+            return true; // Already in Home
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
