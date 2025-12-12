@@ -72,7 +72,7 @@ This Android application helps users calculate monthly and total dividends from 
 
 ## 📦 APK
 Available in:  
-`/apk/DividendCalculator.apk`
+`/APK/app-debug.apk`
 
 ---
 
