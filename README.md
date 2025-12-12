@@ -62,7 +62,7 @@ This Android application helps users calculate monthly and total dividends from 
 Replace placeholders with real screenshots in `/screenshots` folder.
 
 **Home Page**  
-![Home Page](screenshots/home_page_placeholder.png)
+![Home Page](Screenshot/Home.png)
 
 **About Page**  
 ![About Page](screenshots/about_page_placeholder.png)
