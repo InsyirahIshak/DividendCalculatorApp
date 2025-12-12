@@ -59,8 +59,6 @@ This Android application helps users calculate monthly and total dividends from 
 
 ## 📸 Screenshots
 
-Replace placeholders with real screenshots in `/screenshots` folder.
-
 **Home Page**  
 ![Home Page](Screenshot/Home.png)
 
